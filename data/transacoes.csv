@@ -1,11 +1,16 @@
-data,descricao,categoria,valor,tipo
-2025-10-01,Salário,receita,5000.00,entrada
-2025-10-02,Aluguel,moradia,1200.00,saida
-2025-10-03,Supermercado,alimentacao,450.00,saida
-2025-10-05,Netflix,lazer,55.90,saida
-2025-10-07,Farmácia,saude,89.00,saida
-2025-10-10,Restaurante,alimentacao,120.00,saida
-2025-10-12,Uber,transporte,45.00,saida
-2025-10-15,Conta de Luz,moradia,180.00,saida
-2025-10-20,Academia,saude,99.00,saida
-2025-10-25,Combustível,transporte,250.00,saida
+data,descricao,categoria,valor,metodo_pagamento,tipo
+2025-10-02,Amazon Brasil,compras_online,450.00,credito,saida
+2025-10-03,Supermercado Pao de Acucar,supermercado,850.00,debito,saida
+2025-10-05,Netflix e Spotify,streaming_lazer,85.90,credito,saida
+2025-10-06,Posto Shell Gasolina,combustivel,260.00,debito,saida
+2025-10-08,Zara Shopping,vestuario,320.00,credito,saida
+2025-10-09,Farmacia Drogasil,saude,190.00,debito,saida
+2025-10-12,Restaurante Familiar,alimentacao,280.00,credito,saida
+2025-10-14,Carrefour Hipermercado,supermercado,620.00,debito,saida
+2025-10-15,Assinaturas e Software,servicos,74.10,credito,saida
+2025-10-18,Reserva Pousada Fim de Semana,viagem_lazer,450.00,credito,saida
+2025-10-19,Posto Ipiranga Combustivel,combustivel,240.00,debito,saida
+2025-10-21,Padaria e Cafe Colonial,alimentacao,110.00,debito,saida
+2025-10-22,Delivery iFood,alimentacao,140.00,credito,saida
+2025-10-25,Hortifruti Natural,supermercado,230.00,debito,saida
+2025-10-26,Clinica Veterinaria e Pet,pet,200.00,credito,saida

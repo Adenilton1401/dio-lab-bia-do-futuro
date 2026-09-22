@@ -1,0 +1,37 @@
+{
+  "cliente_id": "CLI-884920",
+  "nome": "João Silva",
+  "idade": 34,
+  "profissao": "Engenheiro de Software Sênior",
+  "renda_mensal": 8000.00,
+  "patrimonio_investido": 25000.00,
+  "reserva_emergencia_atual": 25000.00,
+  "cartao_atual": {
+    "nome": "Bradesco Classic Internacional",
+    "bandeira": "Visa",
+    "limite_total": 5000.00,
+    "anuidade_mensal_paga": 28.00,
+    "anuidade_anual_paga": 336.00,
+    "programa_recompensas": "Nenhum (não acumula pontos nem cashback)",
+    "seguro_viagem_incluso": false
+  },
+  "habito_financeiro_mensal": {
+    "gastos_totais_mensais": 4500.00,
+    "gastos_atuais_no_credito": 2000.00,
+    "gastos_atuais_no_debito": 2500.00,
+    "poupanca_mensal_estimada": 3500.00,
+    "paga_fatura_em_dia": true,
+    "usa_rotativo": false
+  },
+  "diagnostico_oportunidade": {
+    "problema_atual": "Paga R$ 336/ano de anuidade em um cartão básico sem benefícios e deixa de pontuar sobre R$ 2.500 gastos no débito.",
+    "potencial_migracao": "Ao migrar os R$ 2.500 de despesas essenciais do débito para o crédito (totalizando R$ 4.500/mês), o cliente alcança 100% de isenção de anuidade no Bradesco Amex Gold Card ou no Bradesco Like Visa, além de acumular até ~1.500 pontos Livelo/mês ou até R$ 100/mês de cashback.",
+    "alerta_consciente": "A troca de débito por crédito deve ser acompanhada do pagamento total da fatura no vencimento e de preferência débito automático, mantendo o controle rigoroso para não gastar além do orçamento."
+  },
+  "interesses_e_preferencias": [
+    "Eliminar cobrança de anuidade",
+    "Acumular milhas aéreas e pontos para viagens familiares",
+    "Contar com seguro médico de viagem internacional confiável",
+    "Aproveitar cashback em supermercado e combustível"
+  ]
+}

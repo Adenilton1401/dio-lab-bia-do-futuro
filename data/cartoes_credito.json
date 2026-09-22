@@ -1,0 +1,219 @@
+[
+  {
+    "id": "bradesco_neo_visa",
+    "nome": "Bradesco Neo Visa Platinum",
+    "bandeira": "Visa",
+    "categoria": "Entrada / Sem Anuidade",
+    "renda_minima": 1500.00,
+    "anuidade": {
+      "valor_total": 360.00,
+      "parcelas": 12,
+      "valor_parcela": 30.00
+    },
+    "politica_isencao": {
+      "regra": "Gaste a partir de R$ 50,00 na fatura de cada mês e tenha 100% de desconto na parcela da anuidade.",
+      "gasto_minimo_mensal_100": 50.00,
+      "gasto_minimo_mensal_50": null,
+      "criterio_investimento": null
+    },
+    "programa_recompensas": {
+      "tipo": "descontos",
+      "descricao": "Plataforma Vai de Visa com ofertas exclusivas e 50% de desconto na rede Cinemark.",
+      "fator_conversao": null,
+      "validade_pontos": null
+    },
+    "beneficios_chave": [
+      "Anuidade grátis gastando apenas R$ 50/mês",
+      "50% de desconto no ingresso e combo pipoca na rede Cinemark",
+      "Acesso à plataforma Vai de Visa com descontos em parceiros",
+      "Tag de pedágio e estacionamento sem mensalidade (Tag Veloe)"
+    ],
+    "seguros_e_assistencias": {
+      "seguro_viagem": false,
+      "garantia_estendida": false,
+      "protecao_compra": true,
+      "teleconsulta_24h": false
+    },
+    "perfil_ideal": "Para quem busca custo zero de manutenção, praticidade no dia a dia e benefícios em lazer como cinema."
+  },
+  {
+    "id": "bradesco_like_visa",
+    "nome": "Bradesco Like Visa",
+    "bandeira": "Visa",
+    "categoria": "Intermediário / Cashback",
+    "renda_minima": 4000.00,
+    "anuidade": {
+      "valor_total": 516.00,
+      "parcelas": 12,
+      "valor_parcela": 43.00
+    },
+    "politica_isencao": {
+      "regra": "Gasto mensal a partir de R$ 3.000,00 garante 100% de isenção da parcela mensal da anuidade. Gastos a partir de R$ 2.000,00 garantem 50% de desconto.",
+      "gasto_minimo_mensal_100": 3000.00,
+      "gasto_minimo_mensal_50": 2000.00,
+      "criterio_investimento": "R$ 30.000 aplicados no Bradesco garantem isenção permanente"
+    },
+    "programa_recompensas": {
+      "tipo": "cashback",
+      "descricao": "Até 3% de cashback direto na fatura no segmento escolhido (Bem-Estar, Viagem, Fashion ou Gastronomia) + 1.5% nas demais compras.",
+      "fator_conversao": "3% na categoria de preferência / 1.5% compras gerais",
+      "validade_pontos": "Crédito direto na fatura mensal"
+    },
+    "beneficios_chave": [
+      "Cashback direto como crédito na fatura, sem burocracia de resgate",
+      "Escolha do segmento com maior cashback (ex: Gastronomia ou Bem-Estar)",
+      "Proteção de Preço Visa (reembolso da diferença se achar mais barato)",
+      "Proteção de Compra contra roubo ou danos acidentais"
+    ],
+    "seguros_e_assistencias": {
+      "seguro_viagem": false,
+      "garantia_estendida": true,
+      "protecao_compra": true,
+      "teleconsulta_24h": false
+    },
+    "perfil_ideal": "Clientes que concentram suas despesas do dia a dia e priorizam retorno financeiro líquido (dinheiro de volta) sem complicação com milhas."
+  },
+  {
+    "id": "bradesco_amex_gold_card",
+    "nome": "Bradesco American Express® Gold Card",
+    "bandeira": "American Express",
+    "categoria": "Intermediário-Avançado / Pontos & Viagem",
+    "renda_minima": 8000.00,
+    "anuidade": {
+      "valor_total": 648.00,
+      "parcelas": 12,
+      "valor_parcela": 54.00
+    },
+    "politica_isencao": {
+      "regra": "Isenção de 100% da anuidade com média de gastos a partir de R$ 4.000,00/mês. 50% de isenção com média de gastos a partir de R$ 2.500,00/mês.",
+      "gasto_minimo_mensal_100": 4000.00,
+      "gasto_minimo_mensal_50": 2500.00,
+      "criterio_investimento": "R$ 50.000 investidos no banco isentam a anuidade"
+    },
+    "programa_recompensas": {
+      "tipo": "pontos_livelo_membership",
+      "descricao": "Pontos Livelo e Membership Rewards que NUNCA expiram. 1.5 ponto por dólar em compras nacionais e 1.8 ponto por dólar em compras internacionais.",
+      "fator_conversao": "1.5 a 1.8 ponto por US$ gasto",
+      "validade_pontos": "Nunca expiram"
+    },
+    "beneficios_chave": [
+      "Pontos Livelo que não expiram, transferíveis 1:1 para Smiles, Latam Pass e TudoAzul",
+      "Sem limite preestabelecido de compras (limite ajustado ao perfil e histórico)",
+      "Acesso ao Programa Menu Bradesco Cartões com descontos e cortesias gastronômicas",
+      "Aceitação global pela rede American Express"
+    ],
+    "seguros_e_assistencias": {
+      "seguro_viagem": true,
+      "apolice": "AIG Seguros Brasil S.A. / Amex (Consumer)",
+      "despesas_medicas_internacionais": "US$ 25,000 / € 30.000 (Atende plenamente ao Acordo de Schengen)",
+      "despesas_odontologicas_internacionais": "US$ 5,000",
+      "morte_invalidez_transporte_publico": "US$ 500,000 (R$ 1.650.000 em viagens domésticas)",
+      "perda_roubo_bagagem": "US$ 2,000 (R$ 6.600)",
+      "atraso_bagagem": "US$ 200 (R$ 660) para atrasos acima de 4h",
+      "acompanhante_hospitalizacao": "Passagem de ida e volta (até US$ 3.000) + Hospedagem US$ 150/dia (até 5 dias)",
+      "prorrogacao_estadia": "US$ 150/dia até 5 dias",
+      "seguro_veiculo_alugado_crldi": "Roubo de bens (US$ 200) + Responsabilidade civil e danos ao veículo (US$ 50,000) nos EUA e Canadá",
+      "garantia_estendida": true,
+      "protecao_compra": true,
+      "teleconsulta_24h": true,
+      "teleconsulta_descricao": "Teleconsulta Global Virtual 24/7 com médicos licenciados dos EUA e equipe multilíngue em português sem custo adicional"
+    },
+    "perfil_ideal": "Ideal para clientes com renda a partir de R$ 8.000 que desejam concentrar seus gastos (~R$ 4.500) para ter isenção total, acumular pontos permanentes e viajar com proteção médica completa para toda a família."
+  },
+  {
+    "id": "bradesco_the_platinum_card",
+    "nome": "Bradesco The Platinum Card® (TPC)",
+    "bandeira": "American Express",
+    "categoria": "Alta Renda / Prestige",
+    "renda_minima": 20000.00,
+    "anuidade": {
+      "valor_total": 1620.00,
+      "parcelas": 12,
+      "valor_parcela": 135.00
+    },
+    "politica_isencao": {
+      "regra": "Isenção de 100% da anuidade com média de gastos a partir de R$ 10.000,00/mês ou patrimônio investido a partir de R$ 100.000,00.",
+      "gasto_minimo_mensal_100": 10000.00,
+      "gasto_minimo_mensal_50": 7000.00,
+      "criterio_investimento": "R$ 100.000 investidos isentam 100% da anuidade"
+    },
+    "programa_recompensas": {
+      "tipo": "pontos_livelo_membership",
+      "descricao": "2.2 pontos Livelo por dólar em compras nacionais e 3.0 pontos por dólar em compras internacionais. Pontos vitalícios que não expiram.",
+      "fator_conversao": "2.2 a 3.0 pontos por US$ gasto",
+      "validade_pontos": "Nunca expiram"
+    },
+    "beneficios_chave": [
+      "Acesso ilimitado e gratuito aos Lounges Bradesco Cartões e American Express Centurion Lounge mundiais com acompanhante",
+      "Serviço de Concierge Platinum 24/7 exclusivo para reservas de voos, hotéis e alta gastronomia",
+      "Sem limite preestabelecido de despesas",
+      "Status preferencial em redes de hotéis de luxo (Hilton Honors, Radisson Rewards, Meliá Rewards)"
+    ],
+    "seguros_e_assistencias": {
+      "seguro_viagem": true,
+      "apolice": "AIG Seguros Brasil S.A. / Amex (Consumer)",
+      "despesas_medicas_internacionais": "US$ 30,000 / € 30.000 (Acordo de Schengen)",
+      "despesas_odontologicas_internacionais": "US$ 5,000",
+      "morte_invalidez_transporte_publico": "US$ 500,000 (R$ 1.650.000 em viagens domésticas)",
+      "perda_roubo_bagagem": "US$ 3,000 (R$ 9.900)",
+      "atraso_bagagem": "US$ 600 (R$ 1.980) para atrasos acima de 4h",
+      "cancelamento_viagem": "US$ 1,000 (R$ 3.300)",
+      "acompanhante_hospitalizacao": "Passagem de ida e volta (até US$ 3.000) + Hospedagem US$ 250/dia (até 5 dias)",
+      "prorrogacao_estadia": "US$ 250/dia até 5 dias",
+      "seguro_veiculo_alugado_crldi": "Cobertura Mundial (Worldwide) até US$ 50,000 + Roubo de bens US$ 200",
+      "garantia_estendida": true,
+      "garantia_estendida_valor": "US$ 5,000 por evento / até US$ 25,000 por ano (R$ 16.500 / R$ 82.500)",
+      "protecao_compra": true,
+      "teleconsulta_24h": true,
+      "teleconsulta_descricao": "Teleconsulta Global Virtual 24/7 de alta prioridade com médicos dos EUA"
+    },
+    "perfil_ideal": "Clientes de alta renda e executivos com perfil de viagens constantes, que buscam salas VIP no mundo todo e coberturas de seguro incomparáveis."
+  },
+  {
+    "id": "bradesco_the_centurion_card",
+    "nome": "The Centurion® Card (Bradesco Amex Black)",
+    "bandeira": "American Express",
+    "categoria": "Ultra High Net Worth / Exclusivo por Convite",
+    "renda_minima": 100000.00,
+    "anuidade": {
+      "valor_total": 25000.00,
+      "parcelas": 12,
+      "valor_parcela": 2083.33
+    },
+    "politica_isencao": {
+      "regra": "Cartão puramente de relacionamento exclusivo concedido apenas por convite (Private Bank). Isenção sujeita a negociação direta com Private Banker.",
+      "gasto_minimo_mensal_100": null,
+      "gasto_minimo_mensal_50": null,
+      "criterio_investimento": "Exclusivo para clientes com investimentos a partir de R$ 5 milhões"
+    },
+    "programa_recompensas": {
+      "tipo": "pontos_livelo_membership",
+      "descricao": "Até 7.0 pontos por dólar gasto em campanhas exclusivas (mínimo 5.0 pontos/US$).",
+      "fator_conversao": "5.0 a 7.0 pontos por US$ gasto",
+      "validade_pontos": "Nunca expiram"
+    },
+    "beneficios_chave": [
+      "Cartão fabricado em metal titânio maciço com design lendário",
+      "Gerente de Relacionamento e Concierge pessoal Centurion dedicado",
+      "Acesso irrestrito a salas VIP de primeira classe mundiais",
+      "Atendimento médico internacional estendido por até 90 dias consecutivos"
+    ],
+    "seguros_e_assistencias": {
+      "seguro_viagem": true,
+      "apolice": "AIG Seguros Brasil S.A. / Amex (Consumer)",
+      "despesas_medicas_internacionais": "US$ 150,000 (Período estendido de 90 dias de viagem)",
+      "despesas_odontologicas_internacionais": "US$ 20,000",
+      "morte_invalidez_transporte_publico": "US$ 1,500,000 (R$ 4.950.000)",
+      "perda_roubo_bagagem": "US$ 3,000 (R$ 9.900)",
+      "atraso_bagagem": "US$ 600 (R$ 1.980)",
+      "atraso_embarque": "Até US$ 600 (R$ 1.980) para atrasos acima de 4h",
+      "cancelamento_viagem": "US$ 3,000 (R$ 9.900)",
+      "retorno_segurado_classe_executiva": "Passagem de ida/volta até US$ 3.000 por ano",
+      "seguro_veiculo_alugado_crldi": "Worldwide até US$ 75,000 (R$ 247.500) + Danos a bens no veículo",
+      "garantia_estendida": true,
+      "protecao_compra": "US$ 5,000 por evento / até US$ 25,000 por ano",
+      "teleconsulta_24h": true
+    },
+    "perfil_ideal": "Clientes Ultra High Net Worth do segmento Private Banking que buscam o patamar máximo de conveniência global e coberturas médicas sem precedentes."
+  }
+]

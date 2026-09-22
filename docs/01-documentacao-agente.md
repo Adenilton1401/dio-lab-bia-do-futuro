@@ -66,7 +66,7 @@ A **Lis** é uma agente financeira de IA generativa com perfil consultivo e proa
 
 ```mermaid
 flowchart TD
-    User([👤 Cliente]) -->|Pergunta / Solicitação| UI[💻 Interface Chatbot Streamlit]
+    User([👤 Cliente]) -->|Pergunta / Solicitação| UI[💻 Interface Web Interativa]
     
     subgraph Orquestração ["🧠 Orquestrador da Lis (Python)"]
         UI --> Controller[Agente Controller]
@@ -102,10 +102,10 @@ flowchart TD
 
 | Componente | Descrição |
 |------------|-----------|
-| **Interface do Usuário** | Aplicação web interativa em Streamlit, simulando uma experiência bancária moderna, ágil e responsiva. |
+| **Interface do Usuário** | Aplicação web interativa desenvolvida em Python nativo (HTML5/CSS3 glassmorphism), simulando uma experiência bancária moderna, ágil e sem dependências externas. |
 | **Orquestrador da Lis** | Módulo em Python responsável por carregar o perfil do cliente, analisar extratos e injetar os dados no contexto da conversa. |
 | **Base de Conhecimento** | Catálogo estruturado de cartões (`cartoes_credito.json`), histórico de transações (`transacoes.csv`) e perfil do cliente (`perfil_cliente.json`). |
-| **Camada de LLM** | Modelo generativo instruído com *System Prompt* robusto, técnicas de *Few-Shot* e instruções restritivas de domínio. |
+| **Camada de LLM** | Modelo local **Gemma 4 12B IT** executado via **llama-server em container Docker**, garantindo privacidade total dos dados bancários do cliente, baixa latência e conformidade estrita de domínio. |
 | **Guardrails Anti-Alucinação** | Verificação para garantir que apenas produtos cadastrados sejam citados, com taxas e condições idênticas aos dados oficiais. |
 
 ---
