@@ -5,6 +5,7 @@ Configurado para respostas curtas, dinâmicas e sempre com chamadas para intera�
 
 import sys
 import json
+import time
 import urllib.request
 import urllib.error
 from typing import Dict, Any, List
@@ -119,8 +120,10 @@ Interesses e Preferências: {', '.join(self.perfil.get('interesses_e_preferencia
             headers={"Content-Type": "application/json"}
         )
 
+        t_inicio = time.time()
         with urllib.request.urlopen(req, timeout=config.TIMEOUT_SECONDS) as res:
             raw_body = res.read().decode("utf-8")
+            tempo_decorrido = time.time() - t_inicio
             data = json.loads(raw_body)
             choice = data["choices"][0]["message"]
             conteudo = choice.get("content", "").strip()
@@ -135,8 +138,9 @@ Interesses e Preferências: {', '.join(self.perfil.get('interesses_e_preferencia
             c_tokens = usage.get("completion_tokens", "?")
             t_tokens = usage.get("total_tokens", "?")
 
+            velocidade = f" ({c_tokens / tempo_decorrido:.1f} t/s)" if isinstance(c_tokens, (int, float)) and tempo_decorrido > 0 else ""
             alerta_corte = " ⚠️ [CORTE POR LIMITE DE TOKENS!]" if finish_reason == "length" else ""
-            print(f"[Tokens] Prompt: {p_tokens} | Resposta: {c_tokens} | Total: {t_tokens} | Término: {finish_reason}{alerta_corte}")
+            print(f"[Tokens] Prompt: {p_tokens} | Resposta: {c_tokens} | Total: {t_tokens} | Término: {finish_reason} | Tempo: {tempo_decorrido:.2f}s{velocidade}{alerta_corte}")
 
             return conteudo
 

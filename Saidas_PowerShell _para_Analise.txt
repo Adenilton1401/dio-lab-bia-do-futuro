@@ -1,0 +1,277 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> docker start llama-server
+llama-server
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+[Lis] Processando pergunta: 'Oi! Boa noite!'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Qual foi o meu gasto com cartão de crédito?'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'sim'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+
+[INFO] Sinal de interrupção (Ctrl+C) recebido.
+[INFO] Servidor finalizado com sucesso.
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> docker start llama-server
+llama-server
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> docker stop llama-server
+llama-server
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> docker start llama-server
+llama-server
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+[Lis] Processando pergunta: 'Boa noite!'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Gasto R$ 4.500/mês. Compensa mais Cashback no Like Visa ou Milhas no Amex Gold?'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Minha renda é R$ 8.000. Posso pedir o The Platinum Card direto?'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Qual é o meu nome?'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'aumente o meu limite do cartão de credito.'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+
+[INFO] Sinal de interrupção (Ctrl+C) recebido.
+[INFO] Servidor finalizado com sucesso.
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> docker stop llama-server
+llama-server
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> docker start llama-server
+llama-server
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+[Lis] Processando pergunta: 'Oi!'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+
+[INFO] Sinal de interrupção (Ctrl+C) recebido.
+[INFO] Servidor finalizado com sucesso.
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+[Lis] Processando pergunta: 'Oi'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Tudo bem?'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'sim'
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+
+[INFO] Sinal de interrupção (Ctrl+C) recebido.
+[INFO] Servidor finalizado com sucesso.
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+[Lis] Processando pergunta: 'Oi! Boa noite!'
+[Tokens] Prompt: 4804 | Resposta: 508 | Total: 5312 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Como você está?'
+[Tokens] Prompt: 4893 | Resposta: 381 | Total: 5274 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Você pode categorizar os meu gastos?'
+[Tokens] Prompt: 4972 | Resposta: 783 | Total: 5755 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'você não tem o meu histórico de transações?'
+[Tokens] Prompt: 5121 | Resposta: 719 | Total: 5840 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+
+[INFO] Sinal de interrupção (Ctrl+C) recebido.
+[INFO] Servidor finalizado com sucesso.
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+[Lis] Processando pergunta: 'Boa noite!'
+[Tokens] Prompt: 1272 | Resposta: 432 | Total: 1704 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'categorize meus gastos do mês passado'
+[Tokens] Prompt: 2972 | Resposta: 1152 | Total: 4124 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'me dê um resumo por categoria dos meus gastos do meus de junho.'
+[Tokens] Prompt: 3190 | Resposta: 1087 | Total: 4277 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'sim'
+[Tokens] Prompt: 1803 | Resposta: 1087 | Total: 2890 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Eu quero acumular pontos.'
+[Tokens] Prompt: 2548 | Resposta: 1020 | Total: 3568 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Posso tranferir meus pontos com bonificação?'
+[Tokens] Prompt: 2691 | Resposta: 836 | Total: 3527 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'eu quero mudar agora o meu cartão Bradesco American Express® Gold Card. faça a essa migração agora!'
+[Tokens] Prompt: 2667 | Resposta: 745 | Total: 3412 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'esse cartão me dá acesso à sala vip?'
+[ERRO LLM] Falha ao consultar o modelo: timed out
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+
+[INFO] Sinal de interrupção (Ctrl+C) recebido.
+[INFO] Servidor finalizado com sucesso.
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+[Lis] Processando pergunta: 'Oi'
+[Tokens] Prompt: 1270 | Resposta: 279 | Total: 1549 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Quais são os benefícios do meu cartão atual?'
+[Tokens] Prompt: 1696 | Resposta: 669 | Total: 2365 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'sim, eu gostaria, mas eu não quero pagar anuidade.'
+[Tokens] Prompt: 1824 | Resposta: 2048 | Total: 3872 | Término: length ⚠️ [CORTE POR LIMITE DE TOKENS!]
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+
+[INFO] Sinal de interrupção (Ctrl+C) recebido.
+[INFO] Servidor finalizado com sucesso.
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[Lis] Processando pergunta: 'Boa noite.'
+[Tokens] Prompt: 1272 | Resposta: 306 | Total: 1578 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Como eu posso acumular pontos no meu cartão?'
+[Tokens] Prompt: 1797 | Resposta: 940 | Total: 2737 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'sim, gostaria.'
+[Tokens] Prompt: 1464 | Resposta: 991 | Total: 2455 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'eu prefiro ganhar pontos livelo. como estão os meus gastos dos ultimos 30 dias no cartão?'
+[Tokens] Prompt: 3623 | Resposta: 1952 | Total: 5575 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'sim, quantos pontos por dolar eu posso ganhar?'
+[Tokens] Prompt: 2545 | Resposta: 651 | Total: 3196 | Término: stop
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+PS D:\ESTUDOS\DIO\BootCamp_Bradesco\dio-lab-bia-do-futuro> python src/app.py
+============================================================
+  Lis 💳 - Assistente de Cartões Bradesco
+  Servidor HTTP Multi-thread Ativo na porta 8501
+  Conectado ao Gemma 4 (Llama-Server Docker)
+  Acesse no seu navegador: http://localhost:8501
+  Pressione Ctrl+C para encerrar o servidor a qualquer momento.
+============================================================
+[HTTP] GET / - GET / HTTP/1.1
+[HTTP] GET /favicon.ico - GET /favicon.ico HTTP/1.1
+[Lis] Processando pergunta: 'Oi! Boa noite!'
+[Tokens] Prompt: 1298 | Resposta: 611 | Total: 1909 | Término: stop | Tempo: 22.46s (27.2 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Eu quero compar Bitcoins.'
+[Tokens] Prompt: 1383 | Resposta: 619 | Total: 2002 | Término: stop | Tempo: 19.46s (31.8 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'qual é o meu gasto mensal no cartão?'
+[Tokens] Prompt: 3278 | Resposta: 864 | Total: 4142 | Término: stop | Tempo: 29.72s (29.1 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'me mostre'
+[Tokens] Prompt: 1638 | Resposta: 1257 | Total: 2895 | Término: stop | Tempo: 38.45s (32.7 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Eu posso isentar a anuidade por investimentos?'
+[Tokens] Prompt: 2196 | Resposta: 1096 | Total: 3292 | Término: stop | Tempo: 34.98s (31.3 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Me fale mais sobre o Bradesco Amex Gold.'
+[Tokens] Prompt: 2519 | Resposta: 1164 | Total: 3683 | Término: stop | Tempo: 37.77s (30.8 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'E eu tenho acesso a salas vip?'
+[Tokens] Prompt: 2611 | Resposta: 3139 | Total: 5750 | Término: stop | Tempo: 98.02s (32.0 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Será que vai chover hoje?'
+[Tokens] Prompt: 1896 | Resposta: 551 | Total: 2447 | Término: stop | Tempo: 19.17s (28.7 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
+[Lis] Resposta enviada com sucesso!
+[Lis] Processando pergunta: 'Eu ouvi dizer que o Amex Gold me deixa compra Criptomoedas.'
+[Tokens] Prompt: 2224 | Resposta: 665 | Total: 2889 | Término: stop | Tempo: 23.06s (28.8 t/s)
+[HTTP] POST /api/chat - POST /api/chat HTTP/1.1
