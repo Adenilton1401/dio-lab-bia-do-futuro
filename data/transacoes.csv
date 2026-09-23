@@ -1,16 +1,147 @@
 data,descricao,categoria,valor,metodo_pagamento,tipo
-2025-10-02,Amazon Brasil,compras_online,450.00,credito,saida
-2025-10-03,Supermercado Pao de Acucar,supermercado,850.00,debito,saida
-2025-10-05,Netflix e Spotify,streaming_lazer,85.90,credito,saida
-2025-10-06,Posto Shell Gasolina,combustivel,260.00,debito,saida
-2025-10-08,Zara Shopping,vestuario,320.00,credito,saida
-2025-10-09,Farmacia Drogasil,saude,190.00,debito,saida
-2025-10-12,Restaurante Familiar,alimentacao,280.00,credito,saida
-2025-10-14,Carrefour Hipermercado,supermercado,620.00,debito,saida
-2025-10-15,Assinaturas e Software,servicos,74.10,credito,saida
-2025-10-18,Reserva Pousada Fim de Semana,viagem_lazer,450.00,credito,saida
-2025-10-19,Posto Ipiranga Combustivel,combustivel,240.00,debito,saida
-2025-10-21,Padaria e Cafe Colonial,alimentacao,110.00,debito,saida
-2025-10-22,Delivery iFood,alimentacao,140.00,credito,saida
-2025-10-25,Hortifruti Natural,supermercado,230.00,debito,saida
-2025-10-26,Clinica Veterinaria e Pet,pet,200.00,credito,saida
+2026-01-01,Droga Raia Medicamentos,saude,143.39,debito,saida
+2026-01-02,Padaria e Cafe Colonial,alimentacao,106.02,debito,saida
+2026-01-04,Carrefour Hipermercado,supermercado,727.18,debito,saida
+2026-01-05,Posto Shell Gasolina,combustivel,267.60,debito,saida
+2026-01-08,Posto Ipiranga Combustivel,combustivel,237.41,debito,saida
+2026-01-14,Farmacia Drogasil,saude,177.55,debito,saida
+2026-01-16,Mambo Supermercados,supermercado,468.71,debito,saida
+2026-01-17,Supermercado Pao de Acucar,supermercado,946.81,debito,saida
+2026-01-19,Delivery iFood,alimentacao,148.19,credito,saida
+2026-01-22,Mercado Livre Compras,compras_online,268.37,credito,saida
+2026-01-26,Academia Smart Fit,servicos,129.90,credito,saida
+2026-01-27,Clinica Veterinaria e Pet,pet,177.69,credito,saida
+2026-01-28,Outback Steakhouse,alimentacao,297.98,credito,saida
+2026-01-29,Assinaturas e Software,servicos,74.10,credito,saida
+2026-01-30,Zara Shopping,vestuario,331.41,credito,saida
+2026-01-31,Restaurante Familiar,alimentacao,344.98,credito,saida
+2026-02-02,Posto Ipiranga Combustivel,combustivel,248.91,debito,saida
+2026-02-04,Acai e Frutaria,alimentacao,105.16,debito,saida
+2026-02-06,Supermercado Pao de Acucar,supermercado,792.53,debito,saida
+2026-02-08,Droga Raia Medicamentos,saude,117.51,debito,saida
+2026-02-09,Carrefour Hipermercado,supermercado,721.33,debito,saida
+2026-02-10,Mambo Supermercados,supermercado,343.42,debito,saida
+2026-02-11,Posto Shell Gasolina,combustivel,284.99,debito,saida
+2026-02-12,Mercado Livre Compras,compras_online,202.90,credito,saida
+2026-02-14,Clinica Veterinaria e Pet,pet,190.61,credito,saida
+2026-02-15,Reserva Pousada Fim de Semana,viagem_lazer,509.32,credito,saida
+2026-02-16,Restaurante Familiar,alimentacao,338.73,credito,saida
+2026-02-17,Assinaturas e Software,servicos,74.10,credito,saida
+2026-02-18,Academia Smart Fit,servicos,129.90,credito,saida
+2026-02-21,Outback Steakhouse,alimentacao,223.29,credito,saida
+2026-02-22,Delivery iFood,alimentacao,113.13,credito,saida
+2026-02-23,Renner Moda,vestuario,221.04,credito,saida
+2026-02-26,Netflix e Spotify,streaming_lazer,85.90,credito,saida
+2026-03-01,Supermercado Pao de Acucar,supermercado,908.45,debito,saida
+2026-03-02,Farmacia Drogasil,saude,191.70,debito,saida
+2026-03-03,Droga Raia Medicamentos,saude,184.11,debito,saida
+2026-03-04,Mambo Supermercados,supermercado,471.21,debito,saida
+2026-03-05,Padaria e Cafe Colonial,alimentacao,91.79,debito,saida
+2026-03-07,Carrefour Hipermercado,supermercado,645.20,debito,saida
+2026-03-10,Posto Ipiranga Combustivel,combustivel,250.97,debito,saida
+2026-03-13,Clinica Veterinaria e Pet,pet,190.51,credito,saida
+2026-03-14,Academia Smart Fit,servicos,129.90,credito,saida
+2026-03-17,Zara Shopping,vestuario,334.59,credito,saida
+2026-03-19,Mercado Livre Compras,compras_online,255.32,credito,saida
+2026-03-21,Assinaturas e Software,servicos,74.10,credito,saida
+2026-03-25,Amazon Brasil,compras_online,379.02,credito,saida
+2026-03-26,Restaurante Familiar,alimentacao,306.86,credito,saida
+2026-03-27,Netflix e Spotify,streaming_lazer,85.90,credito,saida
+2026-03-31,Outback Steakhouse,alimentacao,278.57,credito,saida
+2026-04-01,Padaria e Cafe Colonial,alimentacao,140.52,debito,saida
+2026-04-04,Farmacia Drogasil,saude,149.01,debito,saida
+2026-04-07,Posto Shell Gasolina,combustivel,267.14,debito,saida
+2026-04-09,Posto Ipiranga Combustivel,combustivel,217.10,debito,saida
+2026-04-10,Droga Raia Medicamentos,saude,111.31,debito,saida
+2026-04-11,Mambo Supermercados,supermercado,376.65,debito,saida
+2026-04-14,Supermercado Pao de Acucar,supermercado,861.97,debito,saida
+2026-04-18,Renner Moda,vestuario,235.25,credito,saida
+2026-04-19,Reserva Pousada Fim de Semana,viagem_lazer,405.76,credito,saida
+2026-04-20,Mercado Livre Compras,compras_online,270.94,credito,saida
+2026-04-21,Assinaturas e Software,servicos,74.10,credito,saida
+2026-04-23,Delivery iFood,alimentacao,136.89,credito,saida
+2026-04-24,Zara Shopping,vestuario,290.68,credito,saida
+2026-04-25,Clinica Veterinaria e Pet,pet,187.89,credito,saida
+2026-04-27,Amazon Brasil,compras_online,387.33,credito,saida
+2026-04-28,Restaurante Familiar,alimentacao,246.28,credito,saida
+2026-04-30,Academia Smart Fit,servicos,129.90,credito,saida
+2026-05-03,Hortifruti Natural da Terra,supermercado,256.93,debito,saida
+2026-05-04,Farmacia Drogasil,saude,179.90,debito,saida
+2026-05-05,Acai e Frutaria,alimentacao,87.78,debito,saida
+2026-05-08,Carrefour Hipermercado,supermercado,599.41,debito,saida
+2026-05-09,Supermercado Pao de Acucar,supermercado,789.67,debito,saida
+2026-05-10,Mambo Supermercados,supermercado,450.44,debito,saida
+2026-05-11,Posto Ipiranga Combustivel,combustivel,265.06,debito,saida
+2026-05-12,Reserva Pousada Fim de Semana,viagem_lazer,469.02,credito,saida
+2026-05-13,Netflix e Spotify,streaming_lazer,85.90,credito,saida
+2026-05-16,Outback Steakhouse,alimentacao,317.30,credito,saida
+2026-05-20,Assinaturas e Software,servicos,74.10,credito,saida
+2026-05-24,Restaurante Familiar,alimentacao,331.13,credito,saida
+2026-05-25,Mercado Livre Compras,compras_online,227.14,credito,saida
+2026-05-28,Renner Moda,vestuario,236.07,credito,saida
+2026-05-31,Delivery iFood,alimentacao,121.78,credito,saida
+2026-06-04,Farmacia Drogasil,saude,149.86,debito,saida
+2026-06-05,Droga Raia Medicamentos,saude,126.41,debito,saida
+2026-06-08,Padaria e Cafe Colonial,alimentacao,122.06,debito,saida
+2026-06-09,Hortifruti Natural da Terra,supermercado,248.15,debito,saida
+2026-06-11,Carrefour Hipermercado,supermercado,554.34,debito,saida
+2026-06-13,Acai e Frutaria,alimentacao,95.82,debito,saida
+2026-06-14,Posto Shell Gasolina,combustivel,270.45,debito,saida
+2026-06-15,Supermercado Pao de Acucar,supermercado,784.21,debito,saida
+2026-06-18,Outback Steakhouse,alimentacao,284.71,credito,saida
+2026-06-19,Reserva Pousada Fim de Semana,viagem_lazer,584.58,credito,saida
+2026-06-21,Renner Moda,vestuario,268.11,credito,saida
+2026-06-22,Delivery iFood,alimentacao,169.31,credito,saida
+2026-06-24,Mercado Livre Compras,compras_online,323.38,credito,saida
+2026-06-25,Netflix e Spotify,streaming_lazer,85.90,credito,saida
+2026-06-27,Clinica Veterinaria e Pet,pet,199.18,credito,saida
+2026-06-28,Restaurante Familiar,alimentacao,257.29,credito,saida
+2026-06-29,Academia Smart Fit,servicos,129.90,credito,saida
+2026-07-01,Padaria e Cafe Colonial,alimentacao,127.73,debito,saida
+2026-07-02,Hortifruti Natural da Terra,supermercado,201.37,debito,saida
+2026-07-03,Supermercado Pao de Acucar,supermercado,723.90,debito,saida
+2026-07-04,Mambo Supermercados,supermercado,372.80,debito,saida
+2026-07-07,Posto Ipiranga Combustivel,combustivel,223.16,debito,saida
+2026-07-08,Acai e Frutaria,alimentacao,83.17,debito,saida
+2026-07-09,Carrefour Hipermercado,supermercado,671.22,debito,saida
+2026-07-11,Reserva Pousada Fim de Semana,viagem_lazer,434.16,credito,saida
+2026-07-12,Academia Smart Fit,servicos,129.90,credito,saida
+2026-07-15,Renner Moda,vestuario,223.79,credito,saida
+2026-07-17,Delivery iFood,alimentacao,159.83,credito,saida
+2026-07-21,Clinica Veterinaria e Pet,pet,211.30,credito,saida
+2026-07-22,Mercado Livre Compras,compras_online,268.28,credito,saida
+2026-07-25,Restaurante Familiar,alimentacao,244.05,credito,saida
+2026-07-26,Zara Shopping,vestuario,296.05,credito,saida
+2026-07-30,Amazon Brasil,compras_online,421.32,credito,saida
+2026-08-01,Posto Ipiranga Combustivel,combustivel,220.29,debito,saida
+2026-08-02,Supermercado Pao de Acucar,supermercado,741.15,debito,saida
+2026-08-03,Droga Raia Medicamentos,saude,117.94,debito,saida
+2026-08-06,Hortifruti Natural da Terra,supermercado,290.76,debito,saida
+2026-08-08,Mambo Supermercados,supermercado,383.97,debito,saida
+2026-08-12,Acai e Frutaria,alimentacao,109.18,debito,saida
+2026-08-13,Carrefour Hipermercado,supermercado,681.12,debito,saida
+2026-08-14,Mercado Livre Compras,compras_online,255.54,credito,saida
+2026-08-15,Renner Moda,vestuario,152.46,credito,saida
+2026-08-18,Outback Steakhouse,alimentacao,218.17,credito,saida
+2026-08-26,Academia Smart Fit,servicos,129.90,credito,saida
+2026-08-27,Restaurante Familiar,alimentacao,357.53,credito,saida
+2026-08-28,Clinica Veterinaria e Pet,pet,201.02,credito,saida
+2026-08-29,Amazon Brasil,compras_online,437.86,credito,saida
+2026-08-30,Assinaturas e Software,servicos,74.10,credito,saida
+2026-09-01,Farmacia Drogasil,saude,167.40,debito,saida
+2026-09-03,Hortifruti Natural da Terra,supermercado,288.35,debito,saida
+2026-09-04,Droga Raia Medicamentos,saude,164.30,debito,saida
+2026-09-05,Posto Ipiranga Combustivel,combustivel,245.39,debito,saida
+2026-09-06,Supermercado Pao de Acucar,supermercado,760.66,debito,saida
+2026-09-07,Carrefour Hipermercado,supermercado,644.29,debito,saida
+2026-09-08,Acai e Frutaria,alimentacao,107.09,debito,saida
+2026-09-09,Delivery iFood,alimentacao,152.51,credito,saida
+2026-09-10,Netflix e Spotify,streaming_lazer,85.90,credito,saida
+2026-09-11,Clinica Veterinaria e Pet,pet,209.59,credito,saida
+2026-09-12,Outback Steakhouse,alimentacao,222.44,credito,saida
+2026-09-13,Reserva Pousada Fim de Semana,viagem_lazer,425.43,credito,saida
+2026-09-14,Assinaturas e Software,servicos,74.10,credito,saida
+2026-09-15,Zara Shopping,vestuario,302.88,credito,saida
+2026-09-16,Amazon Brasil,compras_online,419.31,credito,saida
+2026-09-17,Mercado Livre Compras,compras_online,225.29,credito,saida
+2026-09-19,Academia Smart Fit,servicos,129.90,credito,saida

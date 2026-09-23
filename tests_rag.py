@@ -47,7 +47,7 @@ def test_rag():
     agente = AgenteLis()
     ctx_agente = agente.construir_contexto_injetado("Você pode categorizar os meus gastos?")
     print("Tamanho do contexto gerado (caracteres):", len(ctx_agente))
-    assert "DISTRIBUIÇÃO DE GASTOS POR CATEGORIA" in ctx_agente
+    assert "CATEGORIA" in ctx_agente and "Supermercado" in ctx_agente
     print("-> OK! O Agente agora injeta o extrato categorizado quando o cliente pergunta sobre gastos!")
 
     print("\nTODOS OS 5 TESTES DO RAG PASSARAM COM SUCESSO!")

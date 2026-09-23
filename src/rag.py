@@ -72,6 +72,7 @@ class SimpleRAG:
         totais_por_categoria = {}
         credito_por_cat = {}
         debito_por_cat = {}
+        gastos_por_mes = {}
         total_geral = 0.0
 
         linhas_transacoes = []
@@ -80,37 +81,54 @@ class SimpleRAG:
             cat = t["categoria"].replace("_", " ")
             metodo = t["metodo_pagamento"]
             desc = t["descricao"]
+            mes = t["data"][:7]
             total_geral += val
             totais_por_categoria[cat] = totais_por_categoria.get(cat, 0.0) + val
+            gastos_por_mes[mes] = gastos_por_mes.get(mes, 0.0) + val
             if metodo == "credito":
                 credito_por_cat[cat] = credito_por_cat.get(cat, 0.0) + val
             else:
                 debito_por_cat[cat] = debito_por_cat.get(cat, 0.0) + val
             linhas_transacoes.append(f"- {t['data']}: {desc} ({cat}) -> R$ {val:.2f} via {metodo}")
 
+        num_meses = len(gastos_por_mes) or 1
+        media_mensal = total_geral / num_meses
+        media_debito = sum(debito_por_cat.values()) / num_meses
+        media_credito = sum(credito_por_cat.values()) / num_meses
+
+        resumo_meses = " | ".join([f"{m}: R$ {gastos_por_mes[m]:.2f}" for m in sorted(gastos_por_mes.keys())])
+
         resumo_categorias = "\n".join(
-            [f"* {cat.title()}: R$ {totais_por_categoria[cat]:.2f} (Débito: R$ {debito_por_cat.get(cat, 0.0):.2f} | Crédito: R$ {credito_por_cat.get(cat, 0.0):.2f})"
+            [f"* {cat.title()}: Média de R$ {(totais_por_categoria[cat]/num_meses):.2f}/mês (Total no período: R$ {totais_por_categoria[cat]:.2f}) [Débito: R$ {(debito_por_cat.get(cat, 0.0)/num_meses):.2f}/mês | Crédito: R$ {(credito_por_cat.get(cat, 0.0)/num_meses):.2f}/mês]"
              for cat in sorted(totais_por_categoria.keys())]
         )
 
-        doc_transacoes = f"""EXTRATO DETALHADO E CATEGORIZAÇÃO DE GASTOS DO CLIENTE JOÃO SILVA:
-Total de Gastos no Mês: R$ {total_geral:.2f}
-Total no Débito: R$ {sum(debito_por_cat.values()):.2f}
-Total no Crédito: R$ {sum(credito_por_cat.values()):.2f}
+        # Últimas 15 transações mais recentes para referência contextual rápida
+        ultimas_transacoes = "\n".join(linhas_transacoes[-15:])
 
-DISTRIBUIÇÃO DE GASTOS POR CATEGORIA:
+        doc_transacoes = f"""EXTRATO DETALHADO E CATEGORIZAÇÃO DE GASTOS DO CLIENTE JOÃO SILVA (ANO 2026):
+Período Analisado: Janeiro de 2026 até 20 de Setembro de 2026 ({num_meses} meses)
+Média Mensal de Gastos: R$ {media_mensal:.2f}/mês
+- Média no Débito: R$ {media_debito:.2f}/mês
+- Média no Crédito: R$ {media_credito:.2f}/mês
+Total Acumulado no Ano (2026): R$ {total_geral:.2f} ({len(transacoes)} transações)
+
+HISTÓRICO MÊS A MÊS EM 2026:
+{resumo_meses}
+
+DISTRIBUIÇÃO MÉDIA MENSAL POR CATEGORIA:
 {resumo_categorias}
 
 OPORTUNIDADE DE MIGRAÇÃO DO DÉBITO PARA O CRÉDITO:
-As maiores despesas no débito são Supermercado (R$ 1.700,00) e Combustível (R$ 500,00). 
-Transferindo esses R$ 2.200 do débito para um cartão de crédito com benefícios (como Amex Gold ou Like Visa), o cliente atinge isenção total de anuidade e pontua na Livelo ou recebe cashback.
+As maiores despesas rotineiras pagas no débito são Supermercado e Combustível (cerca de R$ 2.400 a R$ 2.600/mês). 
+Transferindo essas despesas habituais do débito para um cartão de crédito com benefícios (como Amex Gold ou Like Visa), o cliente atinge 100% de isenção de anuidade e pontua na Livelo ou recebe cashback.
 
-ITENS DO EXTRATO:
-""" + "\n".join(linhas_transacoes)
+ÚLTIMAS TRANSAÇÕES REGISTRADAS (AMOSTRA):
+{ultimas_transacoes}"""
 
         self.documentos.append(Documento(
             doc_id="extrato_transacoes",
-            titulo="Extrato, Transações e Categorização de Gastos",
+            titulo="Extrato, Transações e Categorização de Gastos (Ano 2026)",
             conteudo=doc_transacoes,
             categoria="financeiro"
         ))

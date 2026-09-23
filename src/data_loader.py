@@ -53,30 +53,38 @@ class DataLoader:
         return historico
 
     def obter_resumo_financeiro(self) -> Dict[str, Any]:
-        """Calcula o resumo consolidado de gastos e oportunidades do cliente."""
+        """Calcula o resumo consolidado de gastos e oportunidades do cliente com base na média mensal."""
         perfil = self.carregar_perfil_cliente()
         transacoes = self.carregar_transacoes()
         cartoes = self.carregar_cartoes()
 
-        total_gastos = sum(t["valor"] for t in transacoes)
-        gastos_credito = sum(t["valor"] for t in transacoes if t.get("metodo_pagamento") == "credito")
-        gastos_debito = sum(t["valor"] for t in transacoes if t.get("metodo_pagamento") == "debito")
+        meses_unicos = set(t["data"][:7] for t in transacoes)
+        num_meses = len(meses_unicos) or 1
 
-        # Gastos por categoria no débito (potenciais de migração)
+        total_gastos_acumulado = sum(t["valor"] for t in transacoes)
+        gastos_credito_acumulado = sum(t["valor"] for t in transacoes if t.get("metodo_pagamento") == "credito")
+        gastos_debito_acumulado = sum(t["valor"] for t in transacoes if t.get("metodo_pagamento") == "debito")
+
+        # Médias mensais de gastos
+        media_gastos_mensal = total_gastos_acumulado / num_meses
+        media_credito_mensal = gastos_credito_acumulado / num_meses
+        media_debito_mensal = gastos_debito_acumulado / num_meses
+
+        # Gastos médios mensais por categoria no débito (potenciais de migração)
         debito_por_categoria = {}
         for t in transacoes:
             if t.get("metodo_pagamento") == "debito":
                 cat = t["categoria"]
-                debito_por_categoria[cat] = debito_por_categoria.get(cat, 0.0) + t["valor"]
+                debito_por_categoria[cat] = debito_por_categoria.get(cat, 0.0) + (t["valor"] / num_meses)
 
-        # Análise de cartões elegíveis pela renda
+        # Análise de cartões elegíveis pela renda e média mensal de gastos
         renda = perfil.get("renda_mensal", 0.0)
         cartoes_elegiveis = []
         for c in cartoes:
             if renda >= c.get("renda_minima", 0.0):
                 isencao = c.get("politica_isencao", {})
                 min_100 = isencao.get("gasto_minimo_mensal_100")
-                isencao_atingivel = (min_100 is not None) and (total_gastos >= min_100)
+                isencao_atingivel = (min_100 is not None) and (media_gastos_mensal >= min_100)
                 cartoes_elegiveis.append({
                     "id": c["id"],
                     "nome": c["nome"],
@@ -90,9 +98,11 @@ class DataLoader:
         return {
             "cliente_nome": perfil.get("nome"),
             "renda_mensal": renda,
-            "total_gastos": total_gastos,
-            "gastos_credito": gastos_credito,
-            "gastos_debito": gastos_debito,
+            "total_gastos": media_gastos_mensal,
+            "gastos_credito": media_credito_mensal,
+            "gastos_debito": media_debito_mensal,
+            "total_acumulado_periodo": total_gastos_acumulado,
+            "meses_analisados": num_meses,
             "debito_por_categoria": debito_por_categoria,
             "anuidade_atual_paga_ano": perfil.get("cartao_atual", {}).get("anuidade_anual_paga", 0.0),
             "cartoes_elegiveis": cartoes_elegiveis
