@@ -58,33 +58,33 @@ class AgenteLis:
         self.cartoes = self.loader.carregar_cartoes()
         self.resumo = self.loader.obter_resumo_financeiro()
         self.rag = SimpleRAG(data_loader=self.loader)
+        self.contexto_estatico = self.obter_contexto_estatico_cliente()
         self.endpoint = config.LLAMA_CHAT_ENDPOINT
         self.model_name = config.DEFAULT_MODEL_NAME
 
-    def construir_contexto_injetado(self, mensagem_usuario: str = "") -> str:
-        """Monta o contexto dinâmico via RAG com base na pergunta específica do usuário."""
+    def obter_contexto_estatico_cliente(self) -> str:
+        """Monta o contexto cadastral imutável do cliente para congelamento no KV Cache."""
         r = self.resumo
         c_atual = self.perfil.get("cartao_atual", {})
-
-        contexto_base = f"""=== DADOS DO CLIENTE (JOÃO SILVA) ===
-Renda: R$ {r['renda_mensal']:.2f} | Gastos Mensais: R$ {r['total_gastos']:.2f} (Crédito: R$ {r['gastos_credito']:.2f} | Débito: R$ {r['gastos_debito']:.2f})
+        return f"""=== DADOS CADASTRAIS DO CLIENTE (JOÃO SILVA) ===
+Renda Mensal Comprovada: R$ {r['renda_mensal']:.2f}
+Média Mensal de Gastos: R$ {r['total_gastos']:.2f} (Crédito: R$ {r['gastos_credito']:.2f} | Débito: R$ {r['gastos_debito']:.2f})
 Cartão Atual: {c_atual.get('nome')} | Anuidade Paga: R$ {c_atual.get('anuidade_mensal_paga', 0):.2f}/mês (R$ {c_atual.get('anuidade_anual_paga', 0):.2f}/ano) - Sem pontos nem seguro.
-Interesses: {', '.join(self.perfil.get('interesses_e_preferencias', []))}"""
+Interesses e Preferências: {', '.join(self.perfil.get('interesses_e_preferencias', []))}"""
 
-        # Busca dinâmica na base de conhecimento (extrato, cartões, seguros ou histórico)
+    def construir_contexto_injetado(self, mensagem_usuario: str = "") -> str:
+        """Monta a visão completa de contexto estático + RAG (usado para testes e auditoria)."""
         contexto_rag = self.rag.buscar_contexto(mensagem_usuario, top_k=2)
-
-        return f"{contexto_base}\n\n=== INFORMAÇÕES RECUPERADAS DA BASE DE CONHECIMENTO (RAG) ===\n{contexto_rag}"
+        return f"{self.contexto_estatico}\n\n=== INFORMAÇÕES RECUPERADAS DA BASE DE CONHECIMENTO (RAG) ===\n{contexto_rag}"
 
     def chamar_llama_server(self, mensagem_usuario: str, historico: List[Dict[str, str]] = None) -> str:
-        """Envia o prompt para o Gemma 4 via llama-server mantendo o histórico conversacional."""
-        contexto = self.construir_contexto_injetado(mensagem_usuario)
-
+        """Envia o prompt otimizado para reaproveitamento máximo de KV Cache (Prompt Caching)."""
+        # 1. Turno SYSTEM 100% ESTÁTICO (Prefixo congelado no KV Cache entre turnos)
         messages = [
-            {"role": "system", "content": f"{SYSTEM_PROMPT}\n\n{contexto}"}
+            {"role": "system", "content": f"{SYSTEM_PROMPT}\n\n{self.contexto_estatico}"}
         ]
 
-        # Envia o histórico real de mensagens anteriores para contexto contínuo
+        # 2. Histórico Sequencial da Conversa (Mantém o prefixo de cache intacto)
         if historico:
             for h in historico[-6:]:
                 role = "assistant" if h.get("role") in ["assistant", "lis"] else "user"
@@ -92,7 +92,19 @@ Interesses: {', '.join(self.perfil.get('interesses_e_preferencias', []))}"""
                 if content:
                     messages.append({"role": role, "content": content})
 
-        messages.append({"role": "user", "content": mensagem_usuario})
+        # 3. Turno Atual do Usuário: anexa o contexto dinâmico do RAG apenas no final
+        contexto_rag = self.rag.buscar_contexto(mensagem_usuario, top_k=2)
+        if contexto_rag:
+            conteudo_user = (
+                f"=== INFORMAÇÕES RELEVANTES DA BASE DE CONHECIMENTO (RAG) ===\n"
+                f"{contexto_rag}\n\n"
+                f"=== MENSAGEM DO CLIENTE ===\n"
+                f"{mensagem_usuario}"
+            )
+        else:
+            conteudo_user = mensagem_usuario
+
+        messages.append({"role": "user", "content": conteudo_user})
 
         payload = {
             "model": self.model_name,
