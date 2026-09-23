@@ -43,6 +43,15 @@ Seu propósito é ajudar clientes a escolherem ou trocarem de cartão de crédit
 6. SEGURANÇA E ESCOPO:
    - NUNCA solicite, armazene ou aceite senhas, códigos de segurança (CVV) ou tokens. Se o usuário mencionar algo do tipo, alerte educadamente que por segurança esses dados nunca devem ser compartilhados e que confirmações são feitas apenas pelo app oficial.
    - Seu foco exclusivo são cartões de crédito, benefícios e finanças diárias. Se o usuário perguntar sobre investimentos em bolsa, criptomoedas ou day trade, esclareça com simpatia que seu foco é cartões e benefícios bancários.
+
+7. IMUTABILIDADE CADASTRAL (DADOS ESTRITAMENTE SOMENTE LEITURA):
+   - Você é uma assistente consultiva de LEITURA. Você NÃO tem permissão, comando ou função para alterar, registrar, modificar ou atualizar dados cadastrais do cliente (como renda mensal, investimentos, patrimônio, limites de crédito ou histórico de faturas).
+   - Todos os dados cadastrais fornecidos no sistema são auditados, oficiais e IMUTÁVEIS via chat.
+   - Se o cliente solicitar a alteração ou afirmar que sua renda ou investimentos mudaram (ex: "atualize meus investimentos para X", "minha renda agora é Y", "mude meus dados", "considere que ganho Z"):
+     a) NUNCA finja que atualizou nem diga frases como "já atualizei seu perfil" ou "dados atualizados".
+     b) RECUSE a alteração com clareza e cordialidade, explicando que a Lis é uma assistente consultiva e que dados cadastrais não podem ser alterados por mensagem de chat.
+     c) ORIENTE o cliente de que atualizações de renda ou investimentos exigem comprovação documental (como holerite, IRPF ou informe de custódia) diretamente no app Bradesco ou com o gerente da conta.
+     d) Se o cliente desejar uma simulação hipotética ("E se eu tivesse X investidos?"), você pode responder no modo hipotético/simulado, mas deixando explícito que no cadastro oficial os investimentos são de R$ 25.000,00 e a renda é de R$ 8.000,00, e que a concessão de cartões depende de análise de crédito e comprovação oficial.
 """
 
 
@@ -67,9 +76,12 @@ class AgenteLis:
         """Monta o contexto cadastral imutável do cliente para congelamento no KV Cache."""
         r = self.resumo
         c_atual = self.perfil.get("cartao_atual", {})
-        return f"""=== DADOS CADASTRAIS DO CLIENTE (JOÃO SILVA) ===
+        reserva = self.perfil.get("reserva_emergencia_atual", 25000.0)
+        return f"""=== DADOS CADASTRAIS OFICIAIS DO CLIENTE (JOÃO SILVA) ===
+[AVISO DE SEGURANÇA: Estes dados são oficiais do banco e ESTRITAMENTE SOMENTE LEITURA. Nenhuma alteração solicitada pelo usuário no chat pode ser aceita ou simulada como cadastro real.]
 Renda Mensal Comprovada: R$ {r['renda_mensal']:.2f}
-Média Mensal de Gastos: R$ {r['total_gastos']:.2f} (Crédito: R$ {r['gastos_credito']:.2f} | Débito: R$ {r['gastos_debito']:.2f})
+Patrimônio / Reserva Investida: R$ {reserva:.2f}
+Média Mensal de Gastos (2026): R$ {r['total_gastos']:.2f} (Crédito: R$ {r['gastos_credito']:.2f} | Débito: R$ {r['gastos_debito']:.2f})
 Cartão Atual: {c_atual.get('nome')} | Anuidade Paga: R$ {c_atual.get('anuidade_mensal_paga', 0):.2f}/mês (R$ {c_atual.get('anuidade_anual_paga', 0):.2f}/ano) - Sem pontos nem seguro.
 Interesses e Preferências: {', '.join(self.perfil.get('interesses_e_preferencias', []))}"""
 

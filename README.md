@@ -128,6 +128,7 @@ Valida automaticamente:
 
 ## 🛡️ Segurança e Anti-Alucinação
 
-- **Grounding Estrito via RAG:** Todas as respostas baseiam-se nos dados indexados em tempo real.
-- **Proteção LGPD:** O agente nunca solicita nem armazena senhas, códigos de segurança (CVV) ou tokens.
+- **Grounding Estrito via RAG:** Todas as respostas baseiam-se exclusivamente nos dados indexados em tempo real na base de conhecimento.
+- **Imutabilidade Cadastral (Anti-Privilege Escalation):** Bloqueio estrito de tentativas de manipulação ou alteração cadastral autodeclaradas via chat (ex: simular ou fingir aumento de renda ou investimentos para obter cartões de alta renda como o TPC). O agente recusa qualquer edição de dados, reforça que o perfil é estritamente de consulta (somente leitura) e orienta o cliente a enviar comprovantes formais pelo app ou com o gerente.
+- **Proteção LGPD:** O agente nunca solicita, armazena ou aceita senhas, códigos de segurança (CVV) ou tokens.
 - **Crédito Consciente:** Alertas constantes para quitação integral da fatura no vencimento e manutenção de reservas com liquidez diária.
