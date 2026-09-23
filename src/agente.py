@@ -3,29 +3,27 @@ Módulo do Agente Lis: Especialista Consultiva em Cartões de Crédito e Finanç
 Configurado para respostas curtas, dinâmicas e sempre com chamadas para interação (CTA).
 """
 
-import os
 import sys
 import json
 import urllib.request
 import urllib.error
 from typing import Dict, Any, List
-from data_loader import DataLoader
-import config
-
-if sys.stdout and hasattr(sys.stdout, "reconfigure"):
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
+try:
+    from data_loader import DataLoader
+    import config
+except ImportError:
+    from src.data_loader import DataLoader
+    from src import config
 
 
 SYSTEM_PROMPT = """Você é a Lis, especialista consultiva em cartões de crédito e finanças pessoais do ecossistema Bradesco.
-Seu propósito é ajudar clientes a eliminarem custos desnecessários com anuidades, aproveitarem benefícios reais (pontos Livelo, milhas, cashback, seguros de viagem AIG/Amex e salas VIP) e utilizarem o crédito de forma consciente.
+Seu propósito é ajudar clientes a escolherem ou trocarem de cartão de crédito de acordo com o perfil do cliente, eliminando custos desnecessários com anuidades, aproveitando benefícios reais (pontos Livelo, milhas, cashback, seguros de viagem AIG/Amex e salas VIP) e a utilizarem o crédito de forma consciente.
 
 ### REGRAS FUNDAMENTAIS DE ESTILO E CONCISÃO:
 1. RESPOSTAS CURTAS E DIRETAS:
-   - Seja SEMPRE concisa e objetiva. Escreva no máximo 2 a 3 parágrafos curtos ou bullet points diretos.
+   - Seja SEMPRE cordial, simpática, concisa e objetiva. Escreva no máximo 2 a 3 parágrafos curtos ou bullet points diretos.
    - NUNCA envie blocos gigantes de texto ou todas as informações de uma vez. Conduza o cliente aos poucos, respondendo exatamente ao que foi perguntado.
+   - Responda SEMPRE diretamente em português, sem rascunhar em inglês ou expor etapas de raciocínio intermediárias.
 
 2. SAUDAÇÕES SIMPLES (NÃO DESPEJE DADOS DE UMA VEZ):
    - Se o cliente apenas disser "Oi", "Olá", "Bom dia" ou mensagens curtas de cumprimento, responda de forma calorosa e breve (1 ou 2 frases) e pergunte como pode ajudar.
@@ -40,7 +38,17 @@ Seu propósito é ajudar clientes a eliminarem custos desnecessários com anuida
 5. GROUNDING E ANTI-ALUCINAÇÃO:
    - Use apenas os dados oficiais fornecidos (cartões, valores de anuidade, regras de isenção e seguros AIG/Amex). Nunca invente benefícios.
    - Alerte sempre sobre consumo consciente e pagamento integral da fatura em débito automático.
+
+6. SEGURANÇA E ESCOPO:
+   - NUNCA solicite, armazene ou aceite senhas, códigos de segurança (CVV) ou tokens. Se o usuário mencionar algo do tipo, alerte educadamente que por segurança esses dados nunca devem ser compartilhados e que confirmações são feitas apenas pelo app oficial.
+   - Seu foco exclusivo são cartões de crédito, benefícios e finanças diárias. Se o usuário perguntar sobre investimentos em bolsa, criptomoedas ou day trade, esclareça com simpatia que seu foco é cartões e benefícios bancários.
 """
+
+
+try:
+    from rag import SimpleRAG
+except ImportError:
+    from src.rag import SimpleRAG
 
 
 class AgenteLis:
@@ -49,28 +57,28 @@ class AgenteLis:
         self.perfil = self.loader.carregar_perfil_cliente()
         self.cartoes = self.loader.carregar_cartoes()
         self.resumo = self.loader.obter_resumo_financeiro()
+        self.rag = SimpleRAG(data_loader=self.loader)
         self.endpoint = config.LLAMA_CHAT_ENDPOINT
         self.model_name = config.DEFAULT_MODEL_NAME
 
-    def construir_contexto_injetado(self) -> str:
-        """Monta o contexto enxuto com base nos dados reais mockados."""
+    def construir_contexto_injetado(self, mensagem_usuario: str = "") -> str:
+        """Monta o contexto dinâmico via RAG com base na pergunta específica do usuário."""
         r = self.resumo
         c_atual = self.perfil.get("cartao_atual", {})
 
-        contexto = f"""=== DADOS DO CLIENTE ===
-Nome: {r['cliente_nome']} | Renda: R$ {r['renda_mensal']:.2f}
-Cartão Atual: {c_atual.get('nome')} | Anuidade Atual: R$ {c_atual.get('anuidade_mensal_paga', 0):.2f}/mês (R$ {c_atual.get('anuidade_anual_paga', 0):.2f}/ano) - Sem pontos nem seguro.
-Gastos Mensais: R$ {r['total_gastos']:.2f} (Crédito: R$ {r['gastos_credito']:.2f} | Débito: R$ {r['gastos_debito']:.2f})
-Interesses: {', '.join(self.perfil.get('interesses_e_preferencias', []))}
+        contexto_base = f"""=== DADOS DO CLIENTE (JOÃO SILVA) ===
+Renda: R$ {r['renda_mensal']:.2f} | Gastos Mensais: R$ {r['total_gastos']:.2f} (Crédito: R$ {r['gastos_credito']:.2f} | Débito: R$ {r['gastos_debito']:.2f})
+Cartão Atual: {c_atual.get('nome')} | Anuidade Paga: R$ {c_atual.get('anuidade_mensal_paga', 0):.2f}/mês (R$ {c_atual.get('anuidade_anual_paga', 0):.2f}/ano) - Sem pontos nem seguro.
+Interesses: {', '.join(self.perfil.get('interesses_e_preferencias', []))}"""
 
-=== CARTÕES DISPONÍVEIS ===
-{json.dumps(self.cartoes, indent=2, ensure_ascii=False)}
-"""
-        return contexto
+        # Busca dinâmica na base de conhecimento (extrato, cartões, seguros ou histórico)
+        contexto_rag = self.rag.buscar_contexto(mensagem_usuario, top_k=2)
+
+        return f"{contexto_base}\n\n=== INFORMAÇÕES RECUPERADAS DA BASE DE CONHECIMENTO (RAG) ===\n{contexto_rag}"
 
     def chamar_llama_server(self, mensagem_usuario: str, historico: List[Dict[str, str]] = None) -> str:
         """Envia o prompt para o Gemma 4 via llama-server mantendo o histórico conversacional."""
-        contexto = self.construir_contexto_injetado()
+        contexto = self.construir_contexto_injetado(mensagem_usuario)
 
         messages = [
             {"role": "system", "content": f"{SYSTEM_PROMPT}\n\n{contexto}"}
@@ -107,79 +115,35 @@ Interesses: {', '.join(self.perfil.get('interesses_e_preferencias', []))}
             
             if not conteudo and choice.get("reasoning_content"):
                 conteudo = choice.get("reasoning_content").strip()
-            
+
+            # Estatísticas de consumo de tokens e motivo de finalização
+            usage = data.get("usage", {})
+            finish_reason = data["choices"][0].get("finish_reason", "unknown")
+            p_tokens = usage.get("prompt_tokens", "?")
+            c_tokens = usage.get("completion_tokens", "?")
+            t_tokens = usage.get("total_tokens", "?")
+
+            alerta_corte = " ⚠️ [CORTE POR LIMITE DE TOKENS!]" if finish_reason == "length" else ""
+            print(f"[Tokens] Prompt: {p_tokens} | Resposta: {c_tokens} | Total: {t_tokens} | Término: {finish_reason}{alerta_corte}")
+
             return conteudo
 
     def responder(self, mensagem_usuario: str, historico_conversa: List[Dict[str, str]] = None) -> str:
-        """Processa a mensagem com validação rápida e chamada ao Gemma 4."""
-        msg_clean = mensagem_usuario.strip()
-        msg_lower = msg_clean.lower()
-        palavras = msg_lower.split()
-
-        # Resposta amigável e breve para cumprimentos isolados
-        saudacoes = ["oi", "olá", "ola", "bom dia", "boa tarde", "boa noite", "e aí", "e ai", "opa", "hello", "hey"]
-        if msg_lower in saudacoes or (len(palavras) <= 2 and any(w in saudacoes for w in palavras)):
-            return (
-                f"Olá, {self.resumo['cliente_nome']}! Tudo bem? "
-                "Sou a Lis, sua especialista em cartões e finanças no Bradesco. "
-                "Como posso te ajudar hoje? Quer ver opções para zerar sua anuidade ou planejar pontos para viagens?"
-            )
-
-        # Guardrail 1: Dados sensíveis (senhas, cvv)
-        if any(w in msg_lower for w in ["senha", "cvv", "código de segurança", "codigo de seguranca", "token"]):
-            return (
-                "Por segurança, eu nunca solicito nem armazeno senhas ou o CVV do seu cartão. "
-                "Toda confirmação é feita com segurança diretamente no app Bradesco. Posso te ajudar com outra dúvida sobre benefícios?"
-            )
-
-        # Guardrail 2: Fora de escopo
-        if any(w in msg_lower for w in ["bitcoin", "cripto", "comprar ações", "bolsa de valores", "day trade"]):
-            return (
-                "Meu foco é te ajudar com cartões de crédito, benefícios e economia diária! "
-                "Para investimentos em bolsa ou cripto, recomendo falar com a assessoria especializada do banco. Quer tirar dúvidas sobre seus cartões?"
-            )
-
-        # Chamada ao Gemma 4 no llama-server
+        """Envia todas as interações do usuário diretamente para o LLM sem respostas pré-programadas."""
         try:
             resposta_llm = self.chamar_llama_server(mensagem_usuario, historico_conversa)
             if resposta_llm:
                 return resposta_llm
-        except Exception:
-            pass
-
-        # Fallback grounded conciso
-        return self._resposta_consultiva_grounded(mensagem_usuario)
-
-    def _resposta_consultiva_grounded(self, mensagem: str) -> str:
-        """Fallback grounded curto e sempre com chamada para interação."""
-        msg = mensagem.lower()
-        r = self.resumo
-        c_atual = self.perfil.get("cartao_atual", {})
-
-        if any(k in msg for k in ["anuidade", "trocar", "viagem", "recomenda", "melhor cartão", "europa", "milhas", "debito", "débito"]):
-            return (
-                f"Hoje você paga **R$ 336/ano de anuidade** no cartão Classic sem nenhum retorno. "
-                f"Concentrando seus **R$ 2.500 do débito no crédito** (somando R$ 4.500/mês), você garante **100% de isenção de anuidade** no **Bradesco Amex Gold Card**!\n\n"
-                f"Além de custo zero, você acumula cerca de **1.500 pontos Livelo/mês** (vitalícios) e ganha **seguro médico de € 30.000 para a Europa (Acordo de Schengen)** com Teleconsulta 24/7.\n\n"
-                f"Gostaria que eu te mostrasse como funciona a regra de isenção ou prefere comparar com a opção de cashback?"
-            )
-        elif any(k in msg for k in ["cashback", "like"]):
-            return (
-                f"Com o **Bradesco Like Visa**, você tem **isenção total de anuidade** (gastos acima de R$ 3.000/mês) e recebe até **3% de cashback direto na fatura**.\n\n"
-                f"Com seus R$ 4.500 de gastos habituais, isso representa um desconto mensal de **R$ 90 a R$ 130** todo mês, sem burocracia de milhas.\n\n"
-                f"Faz mais sentido para você economizar com cashback direto ou acumular pontos para viajar?"
-            )
-        elif any(k in msg for k in ["platinum", "tpc", "centurion"]):
-            return (
-                f"O **The Platinum Card (TPC)** é incrível para salas VIP ilimitadas, mas exige **renda mínima de R$ 20.000** e gastos de R$ 10.000/mês para isenção.\n\n"
-                f"Com sua renda de R$ 8.000 e gastos de R$ 4.500, o degrau perfeito é o **Amex Gold Card**, onde você tem isenção total e constrói relacionamento para um upgrade futuro.\n\n"
-                f"Quer ver os benefícios de viagem do Amex Gold?"
-            )
-        else:
-            return (
-                "Posso te ajudar a eliminar anuidade, simular pontos Livelo ou cashback com seus gastos do dia a dia, ou tirar dúvidas sobre seguros de viagem.\n\n"
-                "Qual desses temas você prefere explorar agora?"
-            )
+            return "Não obtive resposta do modelo de inteligência artificial. Por favor, tente novamente."
+        except Exception as e:
+            print(f"[ERRO LLM] Falha ao consultar o modelo: {e}")
+            if hasattr(e, "read"):
+                try:
+                    detalhes = e.read().decode("utf-8")
+                    print(f"[ERRO LLM Detalhes] {detalhes}")
+                except Exception:
+                    pass
+            return "Desculpe, ocorreu uma instabilidade ao conectar com o modelo de inteligência artificial. Verifique se o servidor local está ativo."
 
 
 if __name__ == "__main__":
