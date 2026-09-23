@@ -11,9 +11,10 @@ A aplicação foi desenvolvida utilizando exclusivamente a **Biblioteca Padrão 
 ```
 src/
 ├── app.py              # Servidor e Aplicação Web Interativa (Python nativo)
-├── agente.py           # Orquestrador da Lis (System Prompt, RAG e Guardrails Anti-Alucinação)
+├── agente.py           # Orquestrador da Lis (Prompt Caching, telemetria e guardrails)
 ├── config.py           # Configurações do LLM (Gemma 4 via llama-server no Docker)
-├── data_loader.py      # Processador de dados (Lê os JSONs/CSVs e calcula métricas financeiras)
+├── data_loader.py      # Processador de dados (médias mensais e métricas financeiras)
+├── rag.py              # SimpleRAG: Motor de recuperação semântica nativo (TF-IDF)
 └── requirements.txt    # Arquivo de dependências (informativo - sem necessidade de pip)
 ```
 
