@@ -151,3 +151,7 @@ python src/agente.py
 - **Imutabilidade Cadastral (Anti-Privilege Escalation):** Bloqueio estrito de tentativas de manipulação ou autodeclaração de dados via chat (ex: fingir aumento de renda ou investimentos para liberar cartões de alta renda como o TPC). O agente recusa a alteração, reforça que o perfil é de somente leitura e orienta a comprovação documental formal no app ou com o gerente.
 - **Proteção LGPD:** O agente nunca solicita, armazena ou aceita senhas, códigos de segurança (CVV) ou tokens.
 - **Crédito Consciente:** Alertas contínuos para quitação integral da fatura no vencimento e manutenção de reservas com liquidez diária.
+
+- ## Video da apresentação do projeto
+
+- https://drive.google.com/file/d/1qQNyOdw83fVjzKXvi7PK8pSIl7p3v95U/view?usp=sharing
