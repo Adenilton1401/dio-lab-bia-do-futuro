@@ -31,7 +31,7 @@ dio-lab-bia-do-futuro/
 ├── 📁 data/                            # Base de conhecimento oficial (6 arquivos de dados)
 │   ├── cartoes_credito.json            # Catálogo oficial de cartões, faixas de isenção e apólice AIG/Amex
 │   ├── historico_atendimento.csv       # Histórico de chamados prévios (anuidade, milhas, seguros)
-│   ├── perfil_cliente.json             # Perfil do cliente (João Silva: R$ 8k renda, Classic atual)
+│   ├── perfil_cliente.json             # Perfil do cliente (Adenilton Pelaes: R$ 8k renda, Classic atual)
 │   ├── perfil_investidor.json          # Perfil de investidor (moderado com foco em liquidez)
 │   ├── produtos_financeiros.json       # Catálogo de renda fixa e fundos para alocação de reserva
 │   └── transacoes.csv                  # 146 transações categorizadas em 2026 (Janeiro a 20/Setembro)
@@ -58,9 +58,9 @@ dio-lab-bia-do-futuro/
 
 ---
 
-## 📊 O Caso do Cliente: João Silva (Série Histórica 2026)
+## 📊 O Caso do Cliente: Adenilton Pelaes (Série Histórica 2026)
 
-O agente trabalha sobre o histórico financeiro consolidado do cliente **João Silva**:
+O agente trabalha sobre o histórico financeiro consolidado do cliente **Adenilton Pelaes**:
 
 - **Renda Mensal Comprovada:** R$ 8.000,00 | **Patrimônio / Reserva Investida:** R$ 25.000,00 (CDB Liquidez Diária)
 - **Cartão Atual:** *Bradesco Classic Internacional*

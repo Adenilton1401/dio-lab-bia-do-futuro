@@ -106,7 +106,7 @@ class SimpleRAG:
         # Últimas 15 transações mais recentes para referência contextual rápida
         ultimas_transacoes = "\n".join(linhas_transacoes[-15:])
 
-        doc_transacoes = f"""EXTRATO DETALHADO E CATEGORIZAÇÃO DE GASTOS DO CLIENTE JOÃO SILVA (ANO 2026):
+        doc_transacoes = f"""EXTRATO DETALHADO E CATEGORIZAÇÃO DE GASTOS DO CLIENTE ADENILTON PELAES (ANO 2026):
 Período Analisado: Janeiro de 2026 até 20 de Setembro de 2026 ({num_meses} meses)
 Média Mensal de Gastos: R$ {media_mensal:.2f}/mês
 - Média no Débito: R$ {media_debito:.2f}/mês
@@ -136,7 +136,7 @@ Transferindo essas despesas habituais do débito para um cartão de crédito com
         # 2. Documento do Perfil do Cliente e Diagnóstico
         c_atual = perfil.get("cartao_atual", {})
         diag = perfil.get("diagnostico_oportunidade", {})
-        doc_perfil = f"""PERFIL FINANCEIRO DO CLIENTE JOÃO SILVA:
+        doc_perfil = f"""PERFIL FINANCEIRO DO CLIENTE ADENILTON PELAES:
 - Nome: {perfil.get('nome')} | Idade: {perfil.get('idade')} anos | Profissão: {perfil.get('profissao')}
 - Renda Mensal Comprovada: R$ {perfil.get('renda_mensal', 0):.2f}
 - Reserva de Emergência / Investimentos: R$ {perfil.get('reserva_emergencia_atual', 0):.2f}
@@ -150,7 +150,7 @@ Transferindo essas despesas habituais do débito para um cartão de crédito com
 """
         self.documentos.append(Documento(
             doc_id="perfil_cliente",
-            titulo="Perfil Financeiro, Cartão Atual e Objetivos de João Silva",
+            titulo="Perfil Financeiro, Cartão Atual e Objetivos de Adenilton Pelaes",
             conteudo=doc_perfil,
             categoria="cliente"
         ))
@@ -229,7 +229,7 @@ Transferindo essas despesas habituais do débito para um cartão de crédito com
         for termo, freq in freq_docs.items():
             self.idf[termo] = math.log((num_docs + 1) / (freq + 1)) + 1.0
 
-    def buscar(self, query: str, top_k: int = 3) -> List[Tuple[Documento, float]]:
+    def buscar(self, query: str, top_k: int = 9) -> List[Tuple[Documento, float]]:
         """Busca os documentos mais relevantes usando similaridade TF-IDF ponderada."""
         tokens_query = normalizar_texto(query).split()
         tokens_query = [t for t in tokens_query if len(t) > 1 and t not in STOPWORDS]
@@ -258,12 +258,18 @@ Transferindo essas despesas habituais do débito para um cartão de crédito com
             q_norm = " ".join(tokens_query)
             if any(k in q_norm for k in ["categoriz", "categoria", "extrato", "gasto", "distribui", "supermercado", "combustivel"]) and doc.doc_id == "extrato_transacoes":
                 score += 0.5
-            if any(k in q_norm for k in ["seguro", "viagem", "schengen", "europa", "medico", "aig"]) and doc.doc_id in ["apolice_seguro_viagem", "cartao_amex_gold"]:
+            if any(k in q_norm for k in ["seguro", "viagem", "schengen", "europa", "medico", "aig"]) and doc.doc_id in ["apolice_seguro_viagem", "cartao_amex_gold", "cartao_bradesco_amex_gold_card"]:
                 score += 0.4
-            if any(k in q_norm for k in ["cashback", "like", "devolve", "dinheiro"]) and doc.doc_id == "cartao_like_visa":
+            if any(k in q_norm for k in ["cashback", "like", "devolve", "dinheiro"]) and doc.doc_id in ["cartao_like_visa", "cartao_bradesco_like_visa"]:
                 score += 0.5
-            if any(k in q_norm for k in ["pontos", "milhas", "livelo", "gold", "amex"]) and doc.doc_id == "cartao_amex_gold":
+            if any(k in q_norm for k in ["pontos", "milhas", "livelo", "gold", "amex"]) and doc.doc_id in ["cartao_amex_gold", "cartao_bradesco_amex_gold_card"]:
                 score += 0.4
+            if any(k in q_norm for k in ["vip", "sala", "salas", "lounge", "loungekey"]):
+                if doc.doc_id in ["cartao_bradesco_amex_gold_card", "cartao_bradesco_the_platinum_card", "cartao_bradesco_the_centurion_card", "cartao_amex_gold"]:
+                    score += 0.4
+                    # Prioridade especial para o cartão adequado à renda do cliente (R$ 8k)
+                    if doc.doc_id in ["cartao_bradesco_amex_gold_card", "cartao_amex_gold"]:
+                        score += 0.2
             if any(k in q_norm for k in ["historico", "liguei", "atendimento", "chamado", "passado"]) and doc.doc_id == "historico_atendimento":
                 score += 0.6
 
@@ -273,13 +279,13 @@ Transferindo essas despesas habituais do débito para um cartão de crédito com
         pontuacoes.sort(key=lambda x: x[1], reverse=True)
         return pontuacoes[:top_k]
 
-    def buscar_contexto(self, query: str, top_k: int = 3) -> str:
+    def buscar_contexto(self, query: str, top_k: int = 9) -> str:
         """Retorna uma string consolidada e formatada com os blocos mais relevantes para injetar no prompt."""
         resultados = self.buscar(query, top_k=top_k)
 
         # Se não houver correspondência específica, retorne os cartões elegíveis principais e perfil
         if not resultados:
-            docs_padrao = [d for d in self.documentos if d.doc_id in ["perfil_cliente", "cartao_amex_gold", "cartao_like_visa"]]
+            docs_padrao = [d for d in self.documentos if d.doc_id in ["perfil_cliente", "cartao_bradesco_amex_gold_card", "cartao_bradesco_like_visa", "cartao_amex_gold", "cartao_like_visa"]]
             resultados = [(d, 1.0) for d in docs_padrao[:top_k]]
 
         blocos = []

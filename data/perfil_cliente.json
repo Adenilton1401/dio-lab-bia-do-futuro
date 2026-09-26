@@ -1,6 +1,6 @@
 {
   "cliente_id": "CLI-884920",
-  "nome": "João Silva",
+  "nome": "Adenilton Pelaes",
   "idade": 34,
   "profissao": "Engenheiro de Software Sênior",
   "renda_mensal": 8000.00,
@@ -32,6 +32,7 @@
     "Eliminar cobrança de anuidade",
     "Acumular milhas aéreas e pontos para viagens familiares",
     "Contar com seguro médico de viagem internacional confiável",
+    "Acessar Salas VIPS gratuitamente",
     "Aproveitar cashback em supermercado e combustível"
   ]
 }

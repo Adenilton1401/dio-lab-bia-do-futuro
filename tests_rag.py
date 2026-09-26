@@ -52,5 +52,13 @@ def test_rag():
 
     print("\nTODOS OS 5 TESTES DO RAG PASSARAM COM SUCESSO!")
 
+    # =========================================================================
+    # 🔍 DEMONSTRAÇÃO / INSPEÇÃO DETALHADA DO PROMPT E DO RAG NO TERMINAL:
+    # Para exibir no terminal o que é estático, o que veio do RAG e o prompt completo,
+    # basta DESCOMENTAR a linha desejada abaixo:
+    # =========================================================================
+    # agente.exibir_inspecao_prompt("Qual cartão tem sala VIP e seguro para Europa?")
+    # agente.exibir_inspecao_prompt("Você pode categorizar os meus gastos?")
+
 if __name__ == "__main__":
     test_rag()

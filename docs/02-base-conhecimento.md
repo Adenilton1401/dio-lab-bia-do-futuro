@@ -36,7 +36,7 @@ Os cartões foram organizados em um escalonamento progressivo de categorias, des
 
 ## 3. Perfil do Cliente e Oportunidade Consultiva
 
-### Dados do Cliente Exemplo: João Silva
+### Dados do Cliente Exemplo: Adenilton Pelaes
 - **Idade:** 34 anos | **Profissão:** Engenheiro de Software Sênior
 - **Renda Mensal:** R$ 8.000,00
 - **Patrimônio / Reserva:** R$ 25.000,00 (em CDB liquidez diária)
@@ -84,7 +84,7 @@ Abaixo, o formato do payload injetado pelo orquestrador no momento da consulta:
 
 ```markdown
 === CONTEXTO DO CLIENTE ===
-Nome: João Silva | Idade: 34 anos | Profissão: Engenheiro de Software Sênior
+Nome: Adenilton Pelaes | Idade: 34 anos | Profissão: Engenheiro de Software Sênior
 Renda Mensal Comprovada: R$ 8.000,00 | Reserva de Emergência: R$ 25.000,00
 Cartão Atual: Bradesco Classic Internacional (Anuidade: R$ 28,00/mês | Pontos: 0 | Seguros: Inexistentes)
 

@@ -130,7 +130,27 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             max-width: 960px;
             width: 100%;
             margin: 0 auto;
-            padding: 16px 24px 24px 24px;
+            padding: 12px 24px 6px 24px;
+        }
+        .app-footer {
+            text-align: center;
+            padding: 6px 16px 14px 16px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+        .footer-author {
+            color: #d1d5db;
+            font-weight: 500;
+        }
+        .footer-author strong {
+            color: #f3f4f6;
+            font-weight: 600;
+        }
+        .footer-sub {
+            color: #9ca3af;
+            font-size: 0.72rem;
+            letter-spacing: 0.3px;
         }
         .input-bar {
             border: 1px solid var(--border-card);
@@ -187,7 +207,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="chat-container" id="chat">
             <div id="emptyState" style="text-align: center; color: var(--text-muted); margin: auto; padding: 40px 20px;">
                 <div style="font-size: 3.2rem; margin-bottom: 12px;">💳</div>
-                <h3 style="color: var(--text-main); font-weight: 600; font-size: 1.3rem;">Como posso te ajudar hoje, João?</h3>
+                <h3 style="color: var(--text-main); font-weight: 600; font-size: 1.3rem;">Como posso te ajudar hoje, Adenilton?</h3>
                 <p style="font-size: 0.9rem; margin-top: 8px; color: var(--text-muted); max-width: 480px; line-height: 1.5; margin-left: auto; margin-right: auto;">
                     Estou pronta para analisar seus gastos, eliminar tarifas de anuidade e te indicar os melhores cartões e benefícios do Bradesco.
                 </p>
@@ -211,6 +231,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 <button class="send-btn" id="sendBtn" onclick="enviar()">Enviar</button>
             </div>
         </div>
+
+        <footer class="app-footer">
+            <p class="footer-author">Desenvolvido por <strong>Adenilton Pelaes</strong></p>
+            <p class="footer-sub">Bootcamp DIO - Bradesco</p>
+        </footer>
     </main>
 
     <script>

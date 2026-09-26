@@ -16,4 +16,4 @@ DEFAULT_MODEL_NAME = os.getenv("LLM_MODEL", "/models/gemma-4-12b-it-UD-Q4_K_XL.g
 # Parâmetros de inferência focados em respostas curtas e dinâmicas
 TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.2"))
 MAX_TOKENS = int(os.getenv("LLM_MAX_TOKENS", "10240"))
-TIMEOUT_SECONDS = int(os.getenv("LLM_TIMEOUT", "180"))
+TIMEOUT_SECONDS = int(os.getenv("LLM_TIMEOUT", "240"))

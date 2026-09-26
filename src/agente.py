@@ -3,12 +3,46 @@ Módulo do Agente Lis: Especialista Consultiva em Cartões de Crédito e Finanç
 Configurado para respostas curtas, dinâmicas e sempre com chamadas para interação (CTA).
 """
 
+import os
 import sys
 import json
 import time
 import urllib.request
 import urllib.error
 from typing import Dict, Any, List
+
+# Garante suporte a UTF-8 e sequências de escape ANSI no PowerShell / CMD do Windows
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+if os.name == "nt":
+    os.system("")  # Habilita interpretação de cores ANSI nativas no console Windows
+
+# Paleta de cores ANSI para o terminal (PowerShell / Windows Terminal / Linux / Mac)
+class Cor:
+    RESET = "\033[0m"
+    BOLD = "\033[1m"
+    DIM = "\033[2m"
+    
+    # Cores de texto
+    VERMELHO = "\033[91m"
+    VERDE = "\033[92m"
+    AMARELO = "\033[93m"
+    AZUL = "\033[94m"
+    MAGENTA = "\033[95m"
+    CIANO = "\033[96m"
+    BRANCO = "\033[97m"
+    CINZA = "\033[90m"
+    
+    # Fundos invertidos para banners
+    BG_AZUL = "\033[44;97m"
+    BG_VERDE = "\033[42;30m"
+    BG_MAGENTA = "\033[45;97m"
+    BG_CIANO = "\033[46;30m"
+
 try:
     from data_loader import DataLoader
     import config
@@ -77,7 +111,7 @@ class AgenteLis:
         r = self.resumo
         c_atual = self.perfil.get("cartao_atual", {})
         reserva = self.perfil.get("reserva_emergencia_atual", 25000.0)
-        return f"""=== DADOS CADASTRAIS OFICIAIS DO CLIENTE (JOÃO SILVA) ===
+        return f"""=== DADOS CADASTRAIS OFICIAIS DO CLIENTE (ADENILTON PELAES) ===
 [AVISO DE SEGURANÇA: Estes dados são oficiais do banco e ESTRITAMENTE SOMENTE LEITURA. Nenhuma alteração solicitada pelo usuário no chat pode ser aceita ou simulada como cadastro real.]
 Renda Mensal Comprovada: R$ {r['renda_mensal']:.2f}
 Patrimônio / Reserva Investida: R$ {reserva:.2f}
@@ -87,11 +121,109 @@ Interesses e Preferências: {', '.join(self.perfil.get('interesses_e_preferencia
 
     def construir_contexto_injetado(self, mensagem_usuario: str = "") -> str:
         """Monta a visão completa de contexto estático + RAG (usado para testes e auditoria)."""
-        contexto_rag = self.rag.buscar_contexto(mensagem_usuario, top_k=2)
+        contexto_rag = self.rag.buscar_contexto(mensagem_usuario, top_k=9)
         return f"{self.contexto_estatico}\n\n=== INFORMAÇÕES RECUPERADAS DA BASE DE CONHECIMENTO (RAG) ===\n{contexto_rag}"
+
+    def exibir_inspecao_prompt(self, mensagem_usuario: str, historico: List[Dict[str, str]] = None):
+        """
+        Exibe detalhadamente no terminal a estrutura completa do prompt enviado ao LLM:
+        1. Parte Estática: System Prompt + Contexto Cadastral Imutável (Cache de Prefixo)
+        2. Parte Dinâmica: Recuperação e Scores do RAG para a mensagem
+        3. Prompt / Payload Completo: Todas as mensagens que vão para o modelo
+        """
+        docs_scores = self.rag.buscar(mensagem_usuario, top_k=9)
+        contexto_rag = self.rag.buscar_contexto(mensagem_usuario, top_k=9)
+
+        messages = [
+            {"role": "system", "content": f"{SYSTEM_PROMPT}\n\n{self.contexto_estatico}"}
+        ]
+
+        if historico:
+            for h in historico[-6:]:
+                role = "assistant" if h.get("role") in ["assistant", "lis"] else "user"
+                content = h.get("content", "")
+                if content:
+                    messages.append({"role": role, "content": content})
+
+        if contexto_rag:
+            conteudo_user = (
+                f"=== INFORMAÇÕES RELEVANTES DA BASE DE CONHECIMENTO (RAG) ===\n"
+                f"{contexto_rag}\n\n"
+                f"=== MENSAGEM DO CLIENTE ===\n"
+                f"{mensagem_usuario}"
+            )
+        else:
+            conteudo_user = mensagem_usuario
+
+        messages.append({"role": "user", "content": conteudo_user})
+
+        sep_duplo = "=" * 80
+        sep_simples = "-" * 80
+
+        # CABEÇALHO PRINCIPAL (CIANO BOLD)
+        print("\n" + Cor.CIANO + Cor.BOLD + sep_duplo + Cor.RESET)
+        print(Cor.CIANO + Cor.BOLD + "🔍 [INSPEÇÃO DE ENGENHARIA DO PROMPT & RAG - AGENTE LIS]" + Cor.RESET)
+        print(Cor.CIANO + Cor.BOLD + sep_duplo + Cor.RESET)
+
+        # 1. PARTE ESTÁTICA (AZUL / CIANO)
+        print("\n" + Cor.AZUL + sep_simples + Cor.RESET)
+        print(Cor.AZUL + Cor.BOLD + "📌 [1. PARTE ESTÁTICA DO PROMPT] - SYSTEM PROMPT & DADOS CADASTRAIS" + Cor.RESET)
+        print(Cor.CINZA + "   (Prefixo imutável congelado no KV Cache / Prompt Caching)" + Cor.RESET)
+        print(Cor.AZUL + sep_simples + Cor.RESET)
+        print(Cor.AMARELO + Cor.BOLD + "--- SYSTEM PROMPT (Instruções e Regras de Negócio) ---" + Cor.RESET)
+        print(Cor.BRANCO + SYSTEM_PROMPT.strip() + Cor.RESET)
+        print("\n" + Cor.AMARELO + Cor.BOLD + "--- CONTEXTO CADASTRAL ESTÁTICO (Cliente Adenilton Pelaes) ---" + Cor.RESET)
+        print(Cor.CIANO + self.contexto_estatico.strip() + Cor.RESET)
+
+        # 2. PARTE DINÂMICA DO RAG (VERDE)
+        print("\n" + Cor.VERDE + sep_simples + Cor.RESET)
+        print(Cor.VERDE + Cor.BOLD + "📚 [2. PARTE DINÂMICA DO RAG] - RECUPERAÇÃO DA BASE DE CONHECIMENTO" + Cor.RESET)
+        print(Cor.VERDE + sep_simples + Cor.RESET)
+        print(Cor.BRANCO + "Mensagem Analisada: " + Cor.AMARELO + Cor.BOLD + f'"{mensagem_usuario}"' + Cor.RESET)
+        if docs_scores:
+            print(Cor.VERDE + "\nDocumentos Recuperados (Ranking TF-IDF + Heurísticas de Intenção):" + Cor.RESET)
+            for rank, (doc, score) in enumerate(docs_scores, 1):
+                print(f"  {Cor.VERDE}{rank}.{Cor.RESET} [{Cor.CIANO}{doc.doc_id}{Cor.RESET}] {Cor.BRANCO}{doc.titulo}{Cor.RESET} | Score de Relevância: {Cor.AMARELO}{Cor.BOLD}{score:.4f}{Cor.RESET}")
+            print(Cor.CINZA + "\nTexto do RAG Injetado no Turno do Usuário:" + Cor.RESET)
+            print(Cor.VERDE + contexto_rag.strip() + Cor.RESET)
+        else:
+            print(Cor.AMARELO + "\nNenhum documento específico atingiu pontuação positiva. Injetado fallback padrão:" + Cor.RESET)
+            print(Cor.VERDE + contexto_rag.strip() + Cor.RESET)
+
+        # 3. PAYLOAD / PROMPT COMPLETO (MAGENTA / ROXO)
+        print("\n" + Cor.MAGENTA + sep_simples + Cor.RESET)
+        print(Cor.MAGENTA + Cor.BOLD + "🚀 [3. PROMPT / PAYLOAD COMPLETO ENVIADO AO MODELO LLM]" + Cor.RESET)
+        print(Cor.MAGENTA + sep_simples + Cor.RESET)
+        print(Cor.CINZA + f"Modelo Alvo: {self.model_name} | Endpoint: {self.endpoint}" + Cor.RESET)
+        print(Cor.CINZA + f"Total de Turnos de Mensagens: {len(messages)}" + Cor.RESET)
+        for idx, msg in enumerate(messages, 1):
+            role = msg["role"]
+            role_tag = role.upper()
+            tamanho = len(msg["content"])
+            if role == "system":
+                cor_tag = Cor.CIANO + Cor.BOLD
+            elif role == "user":
+                cor_tag = Cor.AMARELO + Cor.BOLD
+            else:
+                cor_tag = Cor.VERDE + Cor.BOLD
+
+            print(f"\n{cor_tag}>>> TURNO {idx} [{role_tag}] ({tamanho} caracteres):{Cor.RESET}")
+            print(Cor.BRANCO + msg["content"] + Cor.RESET)
+
+        # ENCERRAMENTO
+        print("\n" + Cor.CIANO + Cor.BOLD + sep_duplo + Cor.RESET)
+        print(Cor.VERDE + Cor.BOLD + "✅ [FIM DA INSPEÇÃO DO PROMPT]" + Cor.RESET)
+        print(Cor.CIANO + Cor.BOLD + sep_duplo + Cor.RESET + "\n")
 
     def chamar_llama_server(self, mensagem_usuario: str, historico: List[Dict[str, str]] = None) -> str:
         """Envia o prompt otimizado para reaproveitamento máximo de KV Cache (Prompt Caching)."""
+        # =========================================================================
+        # 🔍 AUDITORIA DO PROMPT NO TERMINAL:
+        # Descomente a linha abaixo para exibir no terminal o que é estático,
+        # o que veio do RAG e o prompt completo a cada interação (CLI ou Web):
+        self.exibir_inspecao_prompt(mensagem_usuario, historico)
+        # =========================================================================
+
         # 1. Turno SYSTEM 100% ESTÁTICO (Prefixo congelado no KV Cache entre turnos)
         messages = [
             {"role": "system", "content": f"{SYSTEM_PROMPT}\n\n{self.contexto_estatico}"}
@@ -106,7 +238,7 @@ Interesses e Preferências: {', '.join(self.perfil.get('interesses_e_preferencia
                     messages.append({"role": role, "content": content})
 
         # 3. Turno Atual do Usuário: anexa o contexto dinâmico do RAG apenas no final
-        contexto_rag = self.rag.buscar_contexto(mensagem_usuario, top_k=2)
+        contexto_rag = self.rag.buscar_contexto(mensagem_usuario, top_k=9)
         if contexto_rag:
             conteudo_user = (
                 f"=== INFORMAÇÕES RELEVANTES DA BASE DE CONHECIMENTO (RAG) ===\n"
@@ -176,6 +308,13 @@ Interesses e Preferências: {', '.join(self.perfil.get('interesses_e_preferencia
 
 if __name__ == "__main__":
     agente = AgenteLis()
-    print("--- Teste Simples ---")
-    print("Usuário: Oi")
-    print("Lis:", agente.responder("Oi"))
+    
+    # =========================================================================
+    # 🔍 DEMONSTRAÇÃO DE INSPEÇÃO DO PROMPT E DO RAG:
+    # Para visualizar no terminal tudo que foi montado (estático, RAG e prompt final),
+    # basta chamar (ou comentar) a linha abaixo:
+    # =========================================================================
+    agente.exibir_inspecao_prompt("Qual cartão tem sala VIP e seguro para Europa?")
+    
+    # Para testar a chamada real com o modelo local ativo:
+    # print("Lis:", agente.responder("Qual cartão tem sala VIP e seguro para Europa?"))
